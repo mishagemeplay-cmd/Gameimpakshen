@@ -1,0 +1,17 @@
+name: Build APK
+on: 
+  workflow_dispatch: # Позволяет запускать сборку кнопкой
+  push:
+    branches: [ main, master, основной ] # Запуск при сохранении кода
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Build with Buildozer
+        uses: ArtemSerebrennikov/buildozer-action@v1
+        with:
+          buildozer_version: master
+          command: buildozer android debug
